@@ -1,0 +1,17 @@
+package controller
+
+import (
+	"context"
+	"demo3/internal/service"
+	"github.com/gogf/gf-jwt/v2/example/api"
+)
+
+var LogoutInfo = cLogoutInfo{}
+
+type cLogoutInfo struct{}
+
+// Logout 退出登录控制器
+func (c *cLogoutInfo) Logout(ctx context.Context, req *api.AuthLogoutReq) (res *api.AuthLogoutRes, err error) {
+	service.Auth().LogoutHandler(ctx)
+	return
+}

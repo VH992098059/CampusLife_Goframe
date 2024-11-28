@@ -1,0 +1,22 @@
+
+# CLI tool, only in development environment.
+# https://goframe.org/pages/viewpage.action?pageId=3673173
+gfcli:
+  build:
+    name: "demo"
+    arch: "amd64"
+    system: "linux,darwin,windows"
+    mod: ""
+    cgo: 0
+  gen:
+    dao:
+      - link: "mysql:root:root@tcp(127.0.0.1:3306)/linuxdemo?loc=Local&parseTime=true"
+        removePrefix: "gf_"
+        descriptionTag: true
+        noModelComment: true
+#      - link: "mysql:root:root@tcp(127.0.0.1:3306)/linuxdemo_network?loc=Local&parseTime=true"
+#        removePrefix: "gf_"
+#        tables: "school_info"
+#        descriptionTag: true
+#        noModelComment: true
+

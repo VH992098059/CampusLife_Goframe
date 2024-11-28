@@ -1,0 +1,25 @@
+package controller
+
+import (
+	"context"
+	"demo3/api/backapi"
+	"demo3/internal/service"
+	"github.com/gogf/gf/v2/frame/g"
+)
+
+var LoginInfo = cLoginInfo{}
+
+type cLoginInfo struct{}
+
+// LoginInfo 登录控制器 JWT
+func (c *cLoginInfo) LoginInfo(ctx context.Context, req *backapi.LoginReq) (res *backapi.LoginRes, err error) {
+	res = &backapi.LoginRes{}
+	res.Token, res.Expire = service.Auth().LoginHandler(ctx)
+	//redis缓存
+	err = g.Redis().SetEX(ctx, req.UserName, res.Token, int64(service.Auth().Timeout/1000/1000/1000))
+	if err != nil {
+		return nil, err
+	}
+
+	return &backapi.LoginRes{Token: res.Token, Expire: res.Expire}, nil
+}
