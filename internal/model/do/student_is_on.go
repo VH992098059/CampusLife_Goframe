@@ -14,7 +14,6 @@ type StudentIsOn struct {
 	g.Meta    `orm:"table:student_is_on, do:true"`
 	StudentId interface{} // 学号
 	UserId    interface{} // 用户编号
-	Name      interface{} // 姓名
 	IsOn      interface{} // 是否在校
 	SchoolId  interface{} // 学校编号
 	CreateAt  *gtime.Time // 创建时间

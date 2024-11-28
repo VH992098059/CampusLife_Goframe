@@ -22,7 +22,6 @@ type TeacherIsOnDao struct {
 type TeacherIsOnColumns struct {
 	TeacherId string // 职工编号
 	UserId    string // 用户编号
-	Name      string // 姓名
 	IsOn      string // 是否在职
 	SchoolId  string // 学校编号
 	CreateAt  string // 创建时间
@@ -34,7 +33,6 @@ type TeacherIsOnColumns struct {
 var teacherIsOnColumns = TeacherIsOnColumns{
 	TeacherId: "teacher_id",
 	UserId:    "user_id",
-	Name:      "name",
 	IsOn:      "is_on",
 	SchoolId:  "school_id",
 	CreateAt:  "create_at",

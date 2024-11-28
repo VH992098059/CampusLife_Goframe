@@ -11,11 +11,12 @@ import (
 
 // RotationInfo is the golang structure of table rotation_info for DAO operations like Where/Data.
 type RotationInfo struct {
-	g.Meta       `orm:"table:rotation_info, do:true"`
-	RotationId   interface{} // 轮播图编号
-	PicUrl       interface{} // 轮播图路径
-	RotationName interface{} // 轮播图图片名
-	CreateAt     *gtime.Time // 轮播图创建时间
-	UpdateAt     *gtime.Time // 轮播图修改时间
-	DeleteAt     *gtime.Time // 轮播图软删除
+	g.Meta         `orm:"table:rotation_info, do:true"`
+	RotationId     interface{} // 轮播图编号
+	PicUrl         interface{} // 轮播图路径
+	RotationName   interface{} // 轮播图图片名
+	ActivityNumber interface{} // 活动编号
+	CreateAt       *gtime.Time // 轮播图创建时间
+	UpdateAt       *gtime.Time // 轮播图修改时间
+	DeleteAt       *gtime.Time // 轮播图软删除
 }

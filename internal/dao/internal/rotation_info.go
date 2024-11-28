@@ -20,22 +20,24 @@ type RotationInfoDao struct {
 
 // RotationInfoColumns defines and stores column names for table rotation_info.
 type RotationInfoColumns struct {
-	RotationId   string // 轮播图编号
-	PicUrl       string // 轮播图路径
-	RotationName string // 轮播图图片名
-	CreateAt     string // 轮播图创建时间
-	UpdateAt     string // 轮播图修改时间
-	DeleteAt     string // 轮播图软删除
+	RotationId     string // 轮播图编号
+	PicUrl         string // 轮播图路径
+	RotationName   string // 轮播图图片名
+	ActivityNumber string // 活动编号
+	CreateAt       string // 轮播图创建时间
+	UpdateAt       string // 轮播图修改时间
+	DeleteAt       string // 轮播图软删除
 }
 
 // rotationInfoColumns holds the columns for table rotation_info.
 var rotationInfoColumns = RotationInfoColumns{
-	RotationId:   "rotation_id",
-	PicUrl:       "pic_url",
-	RotationName: "rotation_name",
-	CreateAt:     "create_at",
-	UpdateAt:     "update_at",
-	DeleteAt:     "delete_at",
+	RotationId:     "rotation_id",
+	PicUrl:         "pic_url",
+	RotationName:   "rotation_name",
+	ActivityNumber: "activity_number",
+	CreateAt:       "create_at",
+	UpdateAt:       "update_at",
+	DeleteAt:       "delete_at",
 }
 
 // NewRotationInfoDao creates and returns a new DAO object for table data access.
