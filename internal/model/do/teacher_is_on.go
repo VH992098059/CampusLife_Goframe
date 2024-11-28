@@ -14,7 +14,6 @@ type TeacherIsOn struct {
 	g.Meta    `orm:"table:teacher_is_on, do:true"`
 	TeacherId interface{} // 职工编号
 	UserId    interface{} // 用户编号
-	Name      interface{} // 姓名
 	IsOn      interface{} // 是否在职
 	SchoolId  interface{} // 学校编号
 	CreateAt  *gtime.Time // 创建时间

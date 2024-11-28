@@ -12,7 +12,6 @@ import (
 type TeacherIsOn struct {
 	TeacherId int         `json:"teacherId" orm:"teacher_id" description:"职工编号"`
 	UserId    string      `json:"userId"    orm:"user_id"    description:"用户编号"`
-	Name      string      `json:"name"      orm:"name"       description:"姓名"`
 	IsOn      string      `json:"isOn"      orm:"is_on"      description:"是否在职"`
 	SchoolId  int         `json:"schoolId"  orm:"school_id"  description:"学校编号"`
 	CreateAt  *gtime.Time `json:"createAt"  orm:"create_at"  description:"创建时间"`

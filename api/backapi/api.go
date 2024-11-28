@@ -6,8 +6,10 @@ type CommonPaginationReq struct {
 }
 
 type CommonPaginationRes struct {
-	List  interface{} `dc:"列表数据"`
-	Total int         `dc:"总数"`
-	Page  int         `dc:"分页号码"`
-	Size  int         `dc:"分页数量"`
+	List   interface{} `dc:"列表数据"`
+	Total  int         `dc:"总数"`
+	Page   int         `dc:"分页号码"`
+	Size   int         `dc:"分页数量"`
+	Offset int         `json:"offset" dc:"初始容量"`
+	Limit  int         `json:"limit" dc:"最大容量"`
 }

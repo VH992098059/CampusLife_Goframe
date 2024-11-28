@@ -27,13 +27,13 @@ type StudentCreateRes struct {
 	StudentId int `json:"student_id"`
 }
 type StudentUpdateReq struct {
-	g.Meta `path:"/studentUpdate" method:"post"`
+	g.Meta `path:"/studentUpdate" method:"put"`
 	StudentInfo
 }
 type StudentUpdateRes struct {
 }
 type StudentDeleteReq struct {
-	g.Meta    `path:"/studentDelete" method:"post"`
+	g.Meta    `path:"/studentDelete" method:"delete"`
 	StudentId int `json:"student_id" v:"required|length:12,12#学号不能为空|学生ID必须在{max}位"`
 }
 type StudentDeleteRes struct{}

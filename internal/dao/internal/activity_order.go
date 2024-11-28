@@ -20,24 +20,26 @@ type ActivityOrderDao struct {
 
 // ActivityOrderColumns defines and stores column names for table activity_order.
 type ActivityOrderColumns struct {
-	Id           string // id
-	Status       string // 状态（1：待审核 2：待参加 3：已检票 4：已取消）
-	ActivityId   string // 活动id
-	CommonUserId string // 普通用户id
-	CreateAt     string // 创建时间
-	UpdateAt     string // 修改时间
-	DeleteAt     string // 软删除
+	Id             string // id
+	Uuid           string // 活动UUID
+	Status         string // 状态（1：待审核 2：待参加 3：已检票 4：已取消）
+	ActivityNumber string // 活动id
+	CommonUserId   string // 普通用户id
+	CreateAt       string // 创建时间
+	UpdateAt       string // 修改时间
+	DeleteAt       string // 软删除
 }
 
 // activityOrderColumns holds the columns for table activity_order.
 var activityOrderColumns = ActivityOrderColumns{
-	Id:           "id",
-	Status:       "status",
-	ActivityId:   "activity_id",
-	CommonUserId: "common_user_id",
-	CreateAt:     "create_at",
-	UpdateAt:     "update_at",
-	DeleteAt:     "delete_at",
+	Id:             "id",
+	Uuid:           "uuid",
+	Status:         "status",
+	ActivityNumber: "activity_number",
+	CommonUserId:   "common_user_id",
+	CreateAt:       "create_at",
+	UpdateAt:       "update_at",
+	DeleteAt:       "delete_at",
 }
 
 // NewActivityOrderDao creates and returns a new DAO object for table data access.

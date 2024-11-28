@@ -66,6 +66,8 @@ var (
 					controller.StudentInfo,
 					controller.Dormitoryinfo,
 					controller.ActivityInfo,
+					controller.TeacherInfo,
+					controller.ActivityOrder,
 				)
 
 			})

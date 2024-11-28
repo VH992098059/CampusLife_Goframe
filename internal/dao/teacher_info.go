@@ -8,19 +8,19 @@ import (
 	"demo3/internal/dao/internal"
 )
 
-// internalActiveOrderDao is internal type for wrapping internal DAO implements.
-type internalActiveOrderDao = *internal.ActiveOrderDao
+// internalTeacherInfoDao is internal type for wrapping internal DAO implements.
+type internalTeacherInfoDao = *internal.TeacherInfoDao
 
-// activeOrderDao is the data access object for table active_order.
+// teacherInfoDao is the data access object for table teacher_info.
 // You can define custom methods on it to extend its functionality as you wish.
-type activeOrderDao struct {
-	internalActiveOrderDao
+type teacherInfoDao struct {
+	internalTeacherInfoDao
 }
 
 var (
-	// ActiveOrder is globally public accessible object for table active_order operations.
-	ActiveOrder = activeOrderDao{
-		internal.NewActiveOrderDao(),
+	// TeacherInfo is globally public accessible object for table teacher_info operations.
+	TeacherInfo = teacherInfoDao{
+		internal.NewTeacherInfoDao(),
 	}
 )
 

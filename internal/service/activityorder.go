@@ -13,6 +13,9 @@ import (
 type (
 	IActivityOrder interface {
 		Create(ctx context.Context, in model.ActivityOrderAddModelInput) (out model.ActivityOrderAddModelOutput, err error)
+		Delete(ctx context.Context, in model.ActivityOrderDeleteModelInput) (out model.ActivityOrderDeleteModelOutput, err error)
+		GetList(ctx context.Context, in model.ActivityOrderListModelInput) (out model.ActivityOrderListModelOutput, err error)
+		Update(ctx context.Context, in model.ActivityOrderUpdateModelInput) (out model.ActivityOrderUpdateModelOutput, err error)
 	}
 )
 

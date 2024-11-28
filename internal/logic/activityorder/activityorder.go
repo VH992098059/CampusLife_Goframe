@@ -16,9 +16,29 @@ func New() *sActivityOrder {
 	return &sActivityOrder{}
 }
 func (s sActivityOrder) Create(ctx context.Context, in model.ActivityOrderAddModelInput) (out model.ActivityOrderAddModelOutput, err error) {
-	_, err = dao.ActiveOrder.Ctx(ctx).Data(in).InsertAndGetId()
+	_, err = dao.ActivityOrder.Ctx(ctx).Data(in).InsertAndGetId()
 	if err != nil {
 		return out, err
 	}
 	return model.ActivityOrderAddModelOutput{}, err
+}
+func (s sActivityOrder) Delete(ctx context.Context, in model.ActivityOrderDeleteModelInput) (out model.ActivityOrderDeleteModelOutput, err error) {
+	_, err = dao.ActivityOrder.Ctx(ctx).Where(dao.ActivityOrder.Columns().Id, in.ActivityID).Delete()
+	if err != nil {
+		return out, err
+	}
+	return model.ActivityOrderDeleteModelOutput{}, err
+}
+
+func (s sActivityOrder) GetList(ctx context.Context, in model.ActivityOrderListModelInput) (out model.ActivityOrderListModelOutput, err error) {
+	_, err = dao.ActivityOrder.Ctx(ctx).Limit(in.Offset, in.Limit).Unscoped().All()
+	if err != nil {
+		return out, err
+	}
+	return model.ActivityOrderListModelOutput{}, err
+}
+
+func (s sActivityOrder) Update(ctx context.Context, in model.ActivityOrderUpdateModelInput) (out model.ActivityOrderUpdateModelOutput, err error) {
+	//TODO implement me
+	panic("implement me")
 }
