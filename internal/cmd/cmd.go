@@ -11,8 +11,11 @@ import (
 	"demo3/utility"
 	"demo3/utility/middleware"
 	"demo3/utility/response"
+	"fmt"
 	"github.com/gogf/gf/v2/net/ghttp"
 	"github.com/gogf/gf/v2/text/gstr"
+	"math/rand"
+	"time"
 
 	"demo3/utility/gtoken"
 	"github.com/gogf/gf/v2/frame/g"
@@ -44,6 +47,30 @@ var (
 				group.Bind(
 					controller.RegisterUserInfo,
 				)
+				s.BindHandler("/sendCode", func(r *ghttp.Request) {
+					phone := r.Get("phone").String()
+					code := generateCode()
+					// 这里假设有一个发送短信的函数sendSMS
+					if phone == "" {
+						r.Response.WriteJson(g.Map{
+							"status":  "false",
+							"message": "验证码发送失败",
+						})
+					} else {
+						if err := sendSMS(phone, code); err != nil {
+							r.Response.WriteJson(g.Map{
+								"status":  "error",
+								"message": "发送验证码失败",
+							})
+						} else {
+							r.Response.WriteJson(g.Map{
+								"status":  "success",
+								"message": "验证码发送成功",
+							})
+						}
+					}
+
+				})
 				group.Middleware(
 					//是否允许跨域操作
 					service.Middleware().CORS,
@@ -120,4 +147,13 @@ func LoginAfter(r *ghttp.Request, respData gtoken.Resp) {
 		})
 
 	}
+}
+func generateCode() string {
+	rand.New(rand.NewSource(time.Now().UnixNano()))
+	return fmt.Sprintf("%06d", rand.Intn(1000000)) // 生成6位随机数
+}
+func sendSMS(phone, code string) error {
+	// 实现发送短信的逻辑，这里只做一个简单的模拟
+	fmt.Printf("Sending SMS to %s: Your verification code is %s\n", phone, code)
+	return nil
 }
