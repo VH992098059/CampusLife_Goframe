@@ -23,7 +23,7 @@ func (s sActivityOrder) Create(ctx context.Context, in model.ActivityOrderAddMod
 	return model.ActivityOrderAddModelOutput{}, err
 }
 func (s sActivityOrder) Delete(ctx context.Context, in model.ActivityOrderDeleteModelInput) (out model.ActivityOrderDeleteModelOutput, err error) {
-	_, err = dao.ActivityOrder.Ctx(ctx).Where(dao.ActivityOrder.Columns().Id, in.ActivityID).Delete()
+	_, err = dao.ActivityOrder.Ctx(ctx).Where(dao.ActivityOrder.Columns().Uuid, in.ActivityUUID).Delete()
 	if err != nil {
 		return out, err
 	}
@@ -39,6 +39,9 @@ func (s sActivityOrder) GetList(ctx context.Context, in model.ActivityOrderListM
 }
 
 func (s sActivityOrder) Update(ctx context.Context, in model.ActivityOrderUpdateModelInput) (out model.ActivityOrderUpdateModelOutput, err error) {
-	//TODO implement me
-	panic("implement me")
+	_, err = dao.ActivityOrder.Ctx(ctx).Where(dao.ActivityOrder.Columns().Uuid, in.ActivityUUID).Update()
+	if err != nil {
+		return out, err
+	}
+	return model.ActivityOrderUpdateModelOutput{}, err
 }

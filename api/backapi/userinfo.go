@@ -10,7 +10,7 @@ type UserInfo struct {
 	NickName string `json:"nickname" v:"required#昵称不能为空"`
 	Password string `json:"password" v:"required#密码不能为空"`
 	Phone    string `json:"phone" v:"required|phone#用户名不能为空|电话格式不正确"`
-	Wechat   string `json:"wechat" v:"required#微信号不能为空"`
+	Wechat   string `json:"wechat" `
 	Usersalt string `json:"user_salt"`
 }
 type UserLoginInfo struct {

@@ -4,7 +4,6 @@ import (
 	"context"
 	"demo3/api/backapi"
 	"demo3/internal/consts"
-	"demo3/internal/controller"
 	"demo3/internal/dao"
 	"demo3/internal/model"
 	"demo3/internal/service"
@@ -59,16 +58,7 @@ var (
 				if err != nil {
 					panic(err)
 				}
-				group.Bind(
-					controller.Userinfo,
-					controller.SchoolInfo,
-					controller.RotationInfo,
-					controller.StudentInfo,
-					controller.Dormitoryinfo,
-					controller.ActivityInfo,
-					controller.TeacherInfo,
-					controller.ActivityOrder,
-				)
+				group.Bind()
 
 			})
 			s.Run()

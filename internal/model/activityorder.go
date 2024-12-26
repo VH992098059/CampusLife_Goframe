@@ -14,13 +14,12 @@ type ActivityOrderAddModelInput struct {
 type ActivityOrderAddModelOutput struct{}
 
 type ActivityOrderUpdateModelInput struct {
-	Status       int `json:"status"`         // 状态（1：待审核 2：待参加 3：已检票 4：已取消）
-	ActivityID   int `json:"activity_id"`    // 活动ID
-	CommonUserID int `json:"common_user_id"` // 普通用户ID
+	Status       int `json:"status"`        // 状态（1：待审核 2：待参加 3：已检票 4：已取消）
+	ActivityUUID int `json:"activity_uuid"` // 参与活动UUID
 }
 type ActivityOrderUpdateModelOutput struct{}
 type ActivityOrderDeleteModelInput struct {
-	ActivityID int `json:"activity_id"`
+	ActivityUUID string `json:"activity_uuid"`
 }
 type ActivityOrderDeleteModelOutput struct{}
 type ActivityOrderListModelInput struct {

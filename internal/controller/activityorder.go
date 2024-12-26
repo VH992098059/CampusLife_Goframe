@@ -37,3 +37,21 @@ func (i *cActivityOrder) GetList(ctx context.Context, req *backapi.ActivityOrder
 		Total: count,
 	}, err
 }
+func (i *cActivityOrder) DeleteOrder(ctx context.Context, req *backapi.ActivityOrderDeleteReq) (res *backapi.ActivityOrderDeleteRes, err error) {
+	_, err = service.ActivityOrder().Delete(ctx, model.ActivityOrderDeleteModelInput{
+		ActivityUUID: req.Uuid,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &backapi.ActivityOrderDeleteRes{}, nil
+}
+func (i *cActivityOrder) UpdateOrder(ctx context.Context, req *backapi.ActivityOrderUpdateReq) (res *backapi.ActivityOrderUpdateRes, err error) {
+	_, err = service.ActivityOrder().Update(ctx, model.ActivityOrderUpdateModelInput{
+		Status: req.Status,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &backapi.ActivityOrderUpdateRes{}, nil
+}

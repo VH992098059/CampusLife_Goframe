@@ -14,13 +14,15 @@ type ActivityOrderAddReq struct {
 }
 type ActivityOrderAddRes struct{}
 type ActivityOrderUpdateReq struct {
-	g.Meta `path:"/activityOrderUpdate" method:"put"`
-	Status int `json:"status"`
+	g.Meta       `path:"/activityOrderUpdate" method:"put"`
+	Status       int    `json:"status"`        // 状态（1：待审核 2：待参加 3：已检票 4：已取消）
+	ActivityUUID string `json:"activity_uuid"` // 参与活动UUID
+
 }
 type ActivityOrderUpdateRes struct{}
 type ActivityOrderDeleteReq struct {
 	g.Meta `path:"/activityOrderDelete" method:"delete"`
-	Id     int `json:"id"`
+	Uuid   string `json:"activity_uuid"`
 }
 type ActivityOrderDeleteRes struct{}
 type ActivityOrderListReq struct {
