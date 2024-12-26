@@ -4,6 +4,7 @@ import (
 	"context"
 	"demo3/api/backapi"
 	"demo3/internal/consts"
+	"demo3/internal/controller"
 	"demo3/internal/dao"
 	"demo3/internal/model"
 	"demo3/internal/service"
@@ -40,6 +41,9 @@ var (
 			}
 
 			s.Group("/backend", func(group *ghttp.RouterGroup) {
+				group.Bind(
+					controller.RegisterUserInfo,
+				)
 				group.Middleware(
 					//是否允许跨域操作
 					service.Middleware().CORS,
@@ -58,7 +62,9 @@ var (
 				if err != nil {
 					panic(err)
 				}
-				group.Bind()
+				group.Bind(
+					controller.Userinfo,
+				)
 
 			})
 			s.Run()

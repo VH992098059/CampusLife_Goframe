@@ -24,6 +24,7 @@ type UserInfoColumns struct {
 	Nickname string // 用户昵称
 	Username string // 用户账号
 	Password string // 密码
+	Type     string // 用户类型（管理员，活动方，普通用户）
 	Phone    string // 用户电话
 	Wechat   string // 用户微信
 	UserSalt string // 加密盐
@@ -38,6 +39,7 @@ var userInfoColumns = UserInfoColumns{
 	Nickname: "nickname",
 	Username: "username",
 	Password: "password",
+	Type:     "type",
 	Phone:    "phone",
 	Wechat:   "wechat",
 	UserSalt: "user_salt",

@@ -6,8 +6,8 @@ type RegisterUserModelInput struct {
 	NickName string `json:"nickname"`
 	Password string `json:"password"`
 	Phone    string `json:"phone"`
-	Wechat   string `json:"wechat" `
 	Usersalt string `json:"user_salt"`
+	Type     string `json:"type"`
 }
 type RegisterUserModelOutput struct {
 	UserId string `json:"user_id"`
