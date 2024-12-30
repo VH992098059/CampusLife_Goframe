@@ -14,7 +14,7 @@ type UserInfo struct {
 	Nickname string      `json:"nickname" orm:"nickname"  description:"用户昵称"`
 	Username string      `json:"username" orm:"username"  description:"用户账号"`
 	Password string      `json:"password" orm:"password"  description:"密码"`
-	Type     string      `json:"type"     orm:"type"      description:"用户类型（管理员，活动方，普通用户）"`
+	Type     string      `json:"type"     orm:"type"      description:"用户类型（活动方，普通用户）"`
 	Phone    string      `json:"phone"    orm:"phone"     description:"用户电话"`
 	Wechat   string      `json:"wechat"   orm:"wechat"    description:"用户微信"`
 	UserSalt string      `json:"userSalt" orm:"user_salt" description:"加密盐"`

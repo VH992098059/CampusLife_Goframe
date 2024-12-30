@@ -10,6 +10,7 @@ type RegisterUserInfo struct {
 	Phone    string `json:"phone" v:"required|phone#用户名不能为空|电话格式不正确"`
 	Type     string `json:"type" v:"required#用户类型不能为空"`
 	Usersalt string `json:"user_salt"`
+	Code     string `json:"code"`
 }
 type RegisterUserReq struct {
 	g.Meta `path:"/register" method:"post"`

@@ -9,20 +9,18 @@ import (
 	"demo3/internal/model"
 	"demo3/internal/service"
 	"demo3/utility"
+	"demo3/utility/aliyunCode"
+	"demo3/utility/gtoken"
 	"demo3/utility/middleware"
 	"demo3/utility/response"
-	"fmt"
-	"github.com/gogf/gf/v2/net/ghttp"
-	"github.com/gogf/gf/v2/text/gstr"
-	"math/rand"
-	"time"
-
-	"demo3/utility/gtoken"
+	"demo3/utility/validatePhone"
 	"github.com/gogf/gf/v2/frame/g"
+	"github.com/gogf/gf/v2/net/ghttp"
 	"github.com/gogf/gf/v2/os/gcmd"
+	"github.com/gogf/gf/v2/text/gstr"
 )
 
-var UserTimeout = 24 * 60 * 60 * 1000
+var UserTimeout = 24 * 60 * 60 * 1000 //毫秒单位，为1天时间
 var (
 	Main = gcmd.Command{
 		Name:  "main",
@@ -44,37 +42,45 @@ var (
 			}
 
 			s.Group("/backend", func(group *ghttp.RouterGroup) {
-				group.Bind(
-					controller.RegisterUserInfo,
-				)
-				s.BindHandler("/sendCode", func(r *ghttp.Request) {
-					phone := r.Get("phone").String()
-					code := generateCode()
-					// 这里假设有一个发送短信的函数sendSMS
-					if phone == "" {
-						r.Response.WriteJson(g.Map{
-							"status":  "false",
-							"message": "验证码发送失败",
-						})
-					} else {
-						if err := sendSMS(phone, code); err != nil {
-							r.Response.WriteJson(g.Map{
-								"status":  "error",
-								"message": "发送验证码失败",
-							})
-						} else {
-							r.Response.WriteJson(g.Map{
-								"status":  "success",
-								"message": "验证码发送成功",
-							})
-						}
-					}
-
-				})
 				group.Middleware(
 					//是否允许跨域操作
 					service.Middleware().CORS,
 					middleware.MiddlewareHandlerResponse,
+				)
+				//获取验证码
+				s.BindHandler("/sendCode", func(r *ghttp.Request) {
+					/*验证码跨域操作*/
+					r.Response.CORSDefault()
+					r.Middleware.Next()
+
+					phone := r.Get("phone").String()
+					/*手机号正则表达*/
+					err := validatePhone.ValidatePhone(phone)
+					if err != true {
+						r.Response.WriteJson(g.Map{
+							"code": 500,
+							"msg":  "手机号码不正确",
+						})
+						g.Log().Error(ctx, "手机号码不正确")
+						return
+					}
+					/*阿里云验证码*/
+					ValidMainErr := aliyunCode.ValidMain(phone, "SMS_476855598")
+					if ValidMainErr != nil {
+						r.Response.WriteJson(g.Map{
+							"code": 500,
+							"msg":  "验证码发送失败",
+						})
+						return
+					}
+					r.Response.WriteJson(g.Map{
+						"code": 200,
+						"msg":  "验证码发送成功",
+					})
+					return
+				})
+				group.Bind(
+					controller.RegisterUserInfo,
 				)
 				//验证token令牌 JWT
 				/*group.Bind(
@@ -100,7 +106,7 @@ var (
 	}
 )
 
-// Login 登录操作
+// Login 登录操作 （Gtoken）
 func Login(r *ghttp.Request) (string, interface{}) {
 	username := r.Get("username").String()
 	password := r.Get("password").String()
@@ -112,7 +118,7 @@ func Login(r *ghttp.Request) (string, interface{}) {
 	UserInfo := model.UserInfo{}
 	err := dao.UserInfo.Ctx(ctx).Where("username", username).Scan(&UserInfo)
 	if err != nil {
-		r.Response.WriteJson(gtoken.Fail("账号或密码错误"))
+		r.Response.WriteJson(gtoken.Fail("账号不存在"))
 		r.ExitAll()
 	}
 	if utility.EncryptPassword(password, UserInfo.Usersalt) != UserInfo.Password {
@@ -147,13 +153,4 @@ func LoginAfter(r *ghttp.Request, respData gtoken.Resp) {
 		})
 
 	}
-}
-func generateCode() string {
-	rand.New(rand.NewSource(time.Now().UnixNano()))
-	return fmt.Sprintf("%06d", rand.Intn(1000000)) // 生成6位随机数
-}
-func sendSMS(phone, code string) error {
-	// 实现发送短信的逻辑，这里只做一个简单的模拟
-	fmt.Printf("Sending SMS to %s: Your verification code is %s\n", phone, code)
-	return nil
 }

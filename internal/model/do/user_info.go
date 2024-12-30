@@ -16,7 +16,7 @@ type UserInfo struct {
 	Nickname interface{} // 用户昵称
 	Username interface{} // 用户账号
 	Password interface{} // 密码
-	Type     interface{} // 用户类型（管理员，活动方，普通用户）
+	Type     interface{} // 用户类型（活动方，普通用户）
 	Phone    interface{} // 用户电话
 	Wechat   interface{} // 用户微信
 	UserSalt interface{} // 加密盐

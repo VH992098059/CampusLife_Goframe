@@ -24,7 +24,7 @@ type UserInfoColumns struct {
 	Nickname string // 用户昵称
 	Username string // 用户账号
 	Password string // 密码
-	Type     string // 用户类型（管理员，活动方，普通用户）
+	Type     string // 用户类型（活动方，普通用户）
 	Phone    string // 用户电话
 	Wechat   string // 用户微信
 	UserSalt string // 加密盐
