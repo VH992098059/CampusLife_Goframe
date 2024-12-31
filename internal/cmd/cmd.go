@@ -7,7 +7,6 @@ import (
 	"demo3/internal/controller"
 	"demo3/internal/dao"
 	"demo3/internal/model"
-	"demo3/internal/service"
 	"demo3/utility"
 	"demo3/utility/aliyunCode"
 	"demo3/utility/gtoken"
@@ -40,19 +39,15 @@ var (
 				MultiLogin:      true,
 				CacheMode:       gtoken.CacheModeRedis,
 			}
-
+			//是否允许跨域操作
+			s.Use(func(r *ghttp.Request) {
+				r.Response.CORSDefault()
+				r.Middleware.Next()
+			})
 			s.Group("/backend", func(group *ghttp.RouterGroup) {
-				group.Middleware(
-					//是否允许跨域操作
-					service.Middleware().CORS,
-					middleware.MiddlewareHandlerResponse,
-				)
+
 				//获取验证码
 				s.BindHandler("/sendCode", func(r *ghttp.Request) {
-					/*验证码跨域操作*/
-					r.Response.CORSDefault()
-					r.Middleware.Next()
-
 					phone := r.Get("phone").String()
 					/*手机号正则表达*/
 					err := validatePhone.ValidatePhone(phone)
@@ -79,7 +74,12 @@ var (
 					})
 					return
 				})
+				group.Middleware(
+
+					middleware.MiddlewareHandlerResponse,
+				)
 				group.Bind(
+
 					controller.RegisterUserInfo,
 				)
 				//验证token令牌 JWT
@@ -141,7 +141,7 @@ func LoginAfter(r *ghttp.Request, respData gtoken.Resp) {
 		userKey := respData.GetString("userKey")
 		userId := gstr.StrEx(userKey, consts.GTokenUserPrefix)
 		userInfo := model.UserRedis{}
-		err := dao.UserInfo.Ctx(context.TODO()).Where(userId).Scan(&userInfo)
+		err := dao.UserInfo.Ctx(context.TODO()).Where("user_id", userId).Scan(&userInfo)
 		if err != nil {
 			return
 		}

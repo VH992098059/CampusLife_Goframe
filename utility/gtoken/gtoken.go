@@ -323,7 +323,7 @@ func (m *GfToken) EncryptToken(ctx context.Context, userKey string, uuid string)
 		// 重新生成uuid
 		userId := gstr.StrEx(userKey, consts.GTokenUserPrefix)
 		userInfo := entity.UserInfo{}
-		err := dao.UserInfo.Ctx(context.TODO()).Where(userId).Scan(&userInfo)
+		err := dao.UserInfo.Ctx(context.TODO()).Where("user_id", userId).Scan(&userInfo)
 		newUuid, err := gmd5.Encrypt(grand.Letters(10))
 		if err != nil {
 			g.Log().Error(ctx, msgLog(MsgErrAuthUuid), err)
