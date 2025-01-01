@@ -20,8 +20,8 @@ type PhoneCode struct {
 }
 
 var ctx = gctx.New()
-var accessKeyId = "LTAI5tBEBBQTh5PjHHGp76Q4"
-var accessKeySecret = "Z6M5EQ52tPwoUKX8CtO9tCeJLyhlsS"
+var accessKeyId = ""
+var accessKeySecret = ""
 
 // GenerateCode 生成4位随机验证码
 func GenerateCode() string {
