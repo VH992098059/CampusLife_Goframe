@@ -33,6 +33,5 @@ func (a *cUserinfo) Info(ctx context.Context, req *backapi.UserGetInfoReq) (res 
 	fmt.Println("获取redis", get)
 	var resultMap map[string]interface{}
 	err = json.Unmarshal([]byte(get.String()), &resultMap)
-	data := resultMap["data"].(map[string]interface{})
-	return &backapi.UserGetInfoRes{UserId: userId, Username: data["username"]}, nil
+	return &backapi.UserGetInfoRes{UserId: userId}, nil
 }

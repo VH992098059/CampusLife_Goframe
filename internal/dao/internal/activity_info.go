@@ -23,8 +23,8 @@ type ActivityInfoColumns struct {
 	Uuid                  string // id
 	ActivityPosters       string // 活动海报
 	ActivityTitle         string // 活动标题
-	ActivityNumber        string // 活动编号
 	ActivityTypeId        string // 活动类型id
+	ActivityAbout         string // 活动介绍
 	Keywords              string // 关键词
 	ReleaseTime           string // 发布时间
 	CheckStatus           string // 审核状态（0：草稿 1：待审核 2：报名中 3：审核失败 4：待举办 5：进行中 6：已结束）
@@ -34,6 +34,7 @@ type ActivityInfoColumns struct {
 	RegistrationStartTime string // 报名开始时间
 	ActivityStartTime     string // 活动开始时间
 	Addr                  string // 地址
+	PersonCurrent         string // 当前报名人数
 	PersonLimit           string // 人数限制
 	RegistrationFee       string // 报名费用
 	WxCustomerCode        string // 客服微信二维码
@@ -42,6 +43,7 @@ type ActivityInfoColumns struct {
 	ActivityEndTime       string // 活动结束时间
 	CheckNeed             string // 是否需要审核（1：需要 0：不需要）
 	EnterActivistsId      string // 组织活动id
+	Popular               string // 活动热门度
 	CreateAt              string // 创建时间
 	UpdateAt              string // 修改时间
 	DeleteAt              string // 软删除
@@ -52,8 +54,8 @@ var activityInfoColumns = ActivityInfoColumns{
 	Uuid:                  "uuid",
 	ActivityPosters:       "activity_posters",
 	ActivityTitle:         "activity_title",
-	ActivityNumber:        "activity_number",
 	ActivityTypeId:        "activity_type_id",
+	ActivityAbout:         "activity_about",
 	Keywords:              "keywords",
 	ReleaseTime:           "release_time",
 	CheckStatus:           "check_status",
@@ -63,6 +65,7 @@ var activityInfoColumns = ActivityInfoColumns{
 	RegistrationStartTime: "registration_start_time",
 	ActivityStartTime:     "activity_start_time",
 	Addr:                  "addr",
+	PersonCurrent:         "person_current",
 	PersonLimit:           "person_limit",
 	RegistrationFee:       "registration_fee",
 	WxCustomerCode:        "wx_customer_code",
@@ -71,6 +74,7 @@ var activityInfoColumns = ActivityInfoColumns{
 	ActivityEndTime:       "activity_end_time",
 	CheckNeed:             "check_need",
 	EnterActivistsId:      "enter_activists_id",
+	Popular:               "popular",
 	CreateAt:              "create_at",
 	UpdateAt:              "update_at",
 	DeleteAt:              "delete_at",

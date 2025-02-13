@@ -75,12 +75,12 @@ var (
 					return
 				})
 				group.Middleware(
-
 					middleware.MiddlewareHandlerResponse,
 				)
 				group.Bind(
 
 					controller.RegisterUserInfo,
+					controller.ActivityInfo,
 				)
 				//验证token令牌 JWT
 				/*group.Bind(
@@ -97,6 +97,7 @@ var (
 				}
 				group.Bind(
 					controller.Userinfo,
+					controller.JoinActivity,
 				)
 
 			})

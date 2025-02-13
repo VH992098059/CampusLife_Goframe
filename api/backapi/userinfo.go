@@ -62,6 +62,5 @@ type UserGetInfoRes struct {
 	/*Id          int    `json:"id"`
 	IdentityKey string `json:"identity_key"`
 	Payload     string `json:"payload"`*/
-	UserId   string      `json:"id"`
-	Username interface{} `json:"username"`
+	UserId string `json:"id"`
 }
