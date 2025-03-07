@@ -8,14 +8,18 @@ type UserInfo struct {
 	Phone    string `json:"phone"`
 	Wechat   string `json:"wechat"`
 	Usersalt string `json:"user_salt"`
+	Avatar   string `json:"avatar"`
 }
 type UserRedis struct {
 	UserId   string `json:"user_id"`
 	UserName string `json:"username"`
 	NickName string `json:"nickname"`
-	Password string `json:"password"`
-	Phone    string `json:"phone"`
+	//Password string `json:"password"`
+	//Phone  string `json:"phone"`
 	Wechat   string `json:"wechat"`
+	Avatar   string `json:"avatar"`
+	BirthDay string `json:"birth_day"`
+	Email    string `json:"email"`
 }
 
 type UserInfoModelInput struct {
@@ -50,9 +54,16 @@ type UserInfoModelUpdateInput struct {
 	Password string `json:"password"`
 	Phone    string `json:"phone"`
 	Wechat   string `json:"wechat"`
-
 	Usersalt string `json:"user_salt"`
 }
 type UserInfoModelUpdateOutput struct {
 	//Userid uint `json:"userid"`
+}
+
+/*个人信息*/
+type UserGetPersonMsgModelInput struct {
+	UserId string `json:"uuid"`
+}
+type UserGetPersonMsgModelOutput struct {
+	List interface{} `json:"user"`
 }

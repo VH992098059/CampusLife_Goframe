@@ -14,7 +14,7 @@ const (
 	MiddlewareTypeBind   = 2
 	MiddlewareTypeGlobal = 3
 
-	DefaultTimeout        = 10 * 24 * 60 * 60 * 1000
+	DefaultTimeout        = 24 * 60 * 60 * 1000
 	DefaultCacheKey       = "GToken:"
 	DefaultTokenDelimiter = "_"
 	DefaultEncryptKey     = "12345678912345678912345678912345"

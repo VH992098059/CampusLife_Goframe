@@ -2,9 +2,6 @@ package gtoken
 
 import (
 	"context"
-	"demo3/internal/consts"
-	"demo3/internal/dao"
-	"demo3/internal/model/entity"
 	"errors"
 	"fmt"
 	"github.com/gogf/gf/v2/crypto/gaes"
@@ -78,7 +75,7 @@ func (m *GfToken) Login(r *ghttp.Request) {
 
 	if m.MultiLogin {
 		// 支持多端重复登录，返回相同token
-		userCacheResp := m.getToken(r.Context(), userKey)
+		userCacheResp := m.GetToken(r.Context(), userKey)
 		if userCacheResp.Success() {
 			respToken := m.EncryptToken(r.Context(), userKey, userCacheResp.GetString(KeyUuid))
 			m.LoginAfterFunc(r, respToken)
@@ -234,7 +231,7 @@ func (m *GfToken) genToken(ctx context.Context, userKey string, data interface{}
 	if !token.Success() {
 		return token
 	}
-
+	fmt.Println(userKey)
 	cacheKey := m.CacheKey + userKey
 	userCache := g.Map{
 		KeyUserKey:     userKey,
@@ -266,7 +263,7 @@ func (m *GfToken) validToken(ctx context.Context, token string) Resp {
 	userKey := decryptToken.GetString(KeyUserKey)
 	uuid := decryptToken.GetString(KeyUuid)
 
-	userCacheResp := m.getToken(ctx, userKey)
+	userCacheResp := m.GetToken(ctx, userKey)
 	if !userCacheResp.Success() {
 		return userCacheResp
 	}
@@ -279,8 +276,8 @@ func (m *GfToken) validToken(ctx context.Context, token string) Resp {
 	return userCacheResp
 }
 
-// getToken 通过userKey获取Token
-func (m *GfToken) getToken(ctx context.Context, userKey string) Resp {
+// GetToken 通过userKey获取Token
+func (m *GfToken) GetToken(ctx context.Context, userKey string) Resp {
 	cacheKey := m.CacheKey + userKey
 
 	userCacheResp := m.getCache(ctx, cacheKey)
@@ -315,15 +312,12 @@ func (m *GfToken) RemoveToken(ctx context.Context, token string) Resp {
 
 // EncryptToken token加密方法
 func (m *GfToken) EncryptToken(ctx context.Context, userKey string, uuid string) Resp {
-
+	/*重写后*/
 	if userKey == "" {
 		return Fail(MsgErrUserKeyEmpty)
 	}
 	if uuid == "" {
-		// 重新生成uuid
-		userId := gstr.StrEx(userKey, consts.GTokenUserPrefix)
-		userInfo := entity.UserInfo{}
-		err := dao.UserInfo.Ctx(context.TODO()).Where("user_id", userId).Scan(&userInfo)
+
 		newUuid, err := gmd5.Encrypt(grand.Letters(10))
 		if err != nil {
 			g.Log().Error(ctx, msgLog(MsgErrAuthUuid), err)

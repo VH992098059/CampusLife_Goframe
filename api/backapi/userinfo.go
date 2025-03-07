@@ -11,12 +11,32 @@ type UserInfo struct {
 	Password string `json:"password" v:"required#密码不能为空"`
 	Phone    string `json:"phone" v:"required|phone#用户名不能为空|电话格式不正确"`
 	Wechat   string `json:"wechat" `
+	Avatar   string `json:"avatar"`
+	Email    string `json:"email"`
 	Usersalt string `json:"user_salt"`
 }
 type UserLoginInfo struct {
 	Id          int    `json:"id"`
 	IdentityKey string `json:"identity_key"`
 	Payload     string `json:"payload"`
+}
+
+/*个人信息*/
+type UserPerson struct {
+	UserName string `json:"username" v:"required#用户名不能为空"`
+	NickName string `json:"nickname" v:"required#昵称不能为空"`
+	Phone    string `json:"phone" v:"required|phone#用户名不能为空|电话格式不正确"`
+	Wechat   string `json:"wechat" `
+	Avatar   string `json:"avatar"`
+}
+
+type UserPersonPassword struct {
+	Password string `json:"password" v:"required#密码不能为空"`
+}
+type UserProfile struct {
+	UserName string `json:"username"`
+	NickName string `json:"nickname"`
+	Avatar   string `json:"avatar"`
 }
 
 // UserInfoListReq 查询用户
@@ -62,5 +82,25 @@ type UserGetInfoRes struct {
 	/*Id          int    `json:"id"`
 	IdentityKey string `json:"identity_key"`
 	Payload     string `json:"payload"`*/
-	UserId string `json:"id"`
+	UserId string `json:"uuid"`
+	Avatar string `json:"avatar"`
+	//RefreshTime string `json:"refresh_time"`
+	NickName string `json:"nickname"`
+}
+
+type UserGetMsgReq struct {
+	g.Meta `path:"/userProfile" method:"get"`
+	UserId string `json:"uuid"`
+}
+type UserGetMsgRes struct {
+	UserProfile
+}
+
+/*个人信息*/
+type UserGetPersonMsgReq struct {
+	g.Meta `path:"/userPersonMsg" method:"get"`
+	UserId string `json:"uuid"`
+}
+type UserGetPersonMsgRes struct {
+	List interface{} `json:"user"`
 }

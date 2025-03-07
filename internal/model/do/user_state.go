@@ -9,22 +9,17 @@ import (
 	"github.com/gogf/gf/v2/os/gtime"
 )
 
-// UserInfo is the golang structure of table user_info for DAO operations like Where/Data.
-type UserInfo struct {
-	g.Meta   `orm:"table:user_info, do:true"`
+// UserState is the golang structure of table user_state for DAO operations like Where/Data.
+type UserState struct {
+	g.Meta   `orm:"table:user_state, do:true"`
 	UserId   interface{} // 用户ID
-	Avater   interface{} // 用户头像
 	Nickname interface{} // 用户昵称
-	Sex      interface{} // 用户性别
-	Birthday *gtime.Time // 用户生日
-	Email    interface{} // 邮箱
 	Username interface{} // 用户账号
-	Password interface{} // 密码
 	Type     interface{} // 用户类型（活动方，普通用户）
+	Avater   interface{} // 用户头像
 	Phone    interface{} // 用户电话
 	Wechat   interface{} // 用户微信
-	UserSalt interface{} // 加密盐
-	CreateAt *gtime.Time // 创建时间
-	UpdateAt *gtime.Time // 修改时间
-	DeleteAt *gtime.Time // 软删除
+	Birthday *gtime.Time // 用户生日
+	Email    interface{} // 邮箱
+	Sex      interface{} // 用户性别
 }

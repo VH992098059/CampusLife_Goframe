@@ -4,4 +4,5 @@ import (
 	_ "demo3/internal/logic/activityinfo"
 	_ "demo3/internal/logic/joinactivity"
 	_ "demo3/internal/logic/registeruserinfo"
+	_ "demo3/internal/logic/userinfo"
 )

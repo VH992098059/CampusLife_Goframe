@@ -126,9 +126,15 @@ func Login(r *ghttp.Request) (string, interface{}) {
 		r.Response.WriteJson(gtoken.Fail("账号或密码错误"))
 		r.ExitAll()
 	}
-	UserInfo.Password = ""
-	UserInfo.Usersalt = ""
-	return consts.GTokenUserPrefix + UserInfo.UserId, UserInfo
+	UserRedis := model.UserRedis{
+		UserId:   UserInfo.UserId,
+		UserName: UserInfo.UserName,
+		NickName: UserInfo.NickName,
+		Avatar:   UserInfo.Avatar,
+	}
+
+	/*生成token*/
+	return consts.GTokenUserPrefix + UserInfo.UserId, UserRedis
 }
 
 // LoginAfter 登录后操作
@@ -147,6 +153,7 @@ func LoginAfter(r *ghttp.Request, respData gtoken.Resp) {
 			return
 		}
 		response.SuccessWithData(r, &backapi.LoginRes{
+			Uuid:     userId,
 			Type:     "redis",
 			Nickname: userInfo.NickName,
 			Token:    respData.GetString("token"),
