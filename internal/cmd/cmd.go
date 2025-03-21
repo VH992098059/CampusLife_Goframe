@@ -27,8 +27,8 @@ var (
 		Brief: "start http server",
 		Func: func(ctx context.Context, parser *gcmd.Parser) (err error) {
 			s := g.Server()
-			loginFunc := Login
-			loginAfter := LoginAfter
+			loginFunc := Login       //登录操作
+			loginAfter := LoginAfter //登录过程操作
 			gfToken := gtoken.GfToken{
 				Timeout:         UserTimeout,
 				ServerName:      "demo",
@@ -36,8 +36,8 @@ var (
 				LoginBeforeFunc: loginFunc,
 				LoginAfterFunc:  loginAfter,
 				LogoutPath:      "/logout",
-				MultiLogin:      true,
-				CacheMode:       gtoken.CacheModeRedis,
+				MultiLogin:      true,                  //多平台登录
+				CacheMode:       gtoken.CacheModeRedis, //使用redis存储
 			}
 			//是否允许跨域操作
 			s.Use(func(r *ghttp.Request) {
@@ -74,6 +74,7 @@ var (
 					})
 					return
 				})
+				/*中间件*/
 				group.Middleware(
 					middleware.MiddlewareHandlerResponse,
 				)
@@ -137,7 +138,7 @@ func Login(r *ghttp.Request) (string, interface{}) {
 	return consts.GTokenUserPrefix + UserInfo.UserId, UserRedis
 }
 
-// LoginAfter 登录后操作
+// LoginAfter 登录过程操作
 func LoginAfter(r *ghttp.Request, respData gtoken.Resp) {
 	if !respData.Success() {
 		respData.Code = 500
