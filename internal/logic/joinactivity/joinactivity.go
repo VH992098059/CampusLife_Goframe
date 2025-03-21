@@ -9,7 +9,7 @@ import (
 
 type sJoinActivity struct{}
 
-func (s sJoinActivity) InsertJoin(ctx context.Context, in model.JoinActivityModelInput) (out model.JoinActivityModelOutput, err error) {
+func (s *sJoinActivity) InsertJoin(ctx context.Context, in model.JoinActivityModelInput) (out model.JoinActivityModelOutput, err error) {
 	_, err = dao.ActivityJoin.Ctx(ctx).Data(in).Insert()
 
 	if err != nil {

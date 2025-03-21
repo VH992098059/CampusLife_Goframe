@@ -1,0 +1,33 @@
+@media (min-width: 1025px) {
+  #Carousel_body{
+    height: 420px;
+    color: #fff;
+    line-height: 420px;
+    text-align: center;
+    background: #364d79;
+    margin:0
+  }
+  #carousel{
+    padding: 20px;
+  }
+}
+@media (max-width: 1024px) {
+  #Carousel_body{
+    height: 340px;
+    color: #fff;
+    line-height: 340px;
+    text-align: center;
+    background: #364d79;
+    margin:0
+  }
+}
+@media (max-width: 1024px) {
+  #Carousel_body{
+    height: 240px;
+    color: #fff;
+    line-height: 240px;
+    text-align: center;
+    background: #364d79;
+    margin:0
+  }
+}
