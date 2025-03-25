@@ -3,11 +3,11 @@ import { useLocation } from "react-router-dom";
 import {Dropdown, Menu, MenuProps, message} from "antd";
 import {Header} from "antd/es/layout/layout";
 import AvaterModel from "./AvaterModel/AvaterModel.tsx";
-import {GiftOutlined, HomeOutlined, SearchOutlined} from "@ant-design/icons";
+import Icon, {GiftOutlined, HomeOutlined, SearchOutlined} from "@ant-design/icons";
 import { JSX } from "react/jsx-runtime";
 import {useNavigate} from "react-router-dom";
 import Search from "antd/es/input/Search";
-
+import DormitorySvg from "../../../assets/icon/dormitory.svg";
 
 function getItem(label: string, key: string, icon: JSX.Element, children: string) {
     return {
@@ -21,7 +21,10 @@ function getItem(label: string, key: string, icon: JSX.Element, children: string
 const menuItems = [
     getItem("首页", '/home', <HomeOutlined/>, ""),
     getItem("活动专栏", '/activity', <GiftOutlined/>, ""),
-    getItem("宿舍专栏","/dormitory",<></>,"")
+    getItem("宿舍专栏","/dormitory",<Icon component={DormitorySvg}/>,""),
+    getItem("寻物启事","/searchforthings",<></>, ""),
+    getItem("公告","/announcement",<></>, ""),
+
 ];
 
 

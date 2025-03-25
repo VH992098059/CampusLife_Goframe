@@ -11,6 +11,7 @@ import  ActivityTotalPage  from "../page/ActivityTotalPage/ActivityTotalPage.tsx
 import { SearchPage } from "../page/Search/SearchPage.tsx";
 import { PrivateRoute } from "./privateRoute/PrivateRoute.tsx";
 import { ProFile } from "../page/Account/profile/ProFile.tsx";
+import { Dormitory } from "../page/Dormitory/Dormitory.tsx";
 
 
 const router=createBrowserRouter([
@@ -42,6 +43,10 @@ const router=createBrowserRouter([
             {
                 path:"/account/profile",
                 element:lazyLoad(<ProFile/>)
+            },
+            {
+                path:"/dormitory",
+                element:lazyLoad(<Dormitory/>)
             }
         ]
     },

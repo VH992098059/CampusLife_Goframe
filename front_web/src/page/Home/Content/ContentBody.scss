@@ -1,0 +1,13 @@
+@media (min-width: 1025px) {
+  #carousel{
+    margin: 20px;
+  }
+  .remen{
+    justify-content: space-between;
+  }
+}
+@media (max-width: 768px) {
+  .remen{
+    justify-content: space-around;
+  }
+}

@@ -1,9 +1,10 @@
-import {Button, message} from "antd";
+
 import {useContext, useEffect} from "react";
 import {getUuid, setActivityUuid} from "../../../router/token/token.tsx";
 import MyContent from "../ActivityContent/ActivityContent.tsx";
 import { useNavigate } from 'react-router-dom';
 import { ActivityJoin } from "../../../api/activity/activity.tsx";
+import {Button, message} from "antd";
 const params = new URLSearchParams(window.location.search);
 /* 获取活动信息 */
 const GetMes=(key:string)=>{
@@ -14,7 +15,7 @@ const GetMes=(key:string)=>{
             message.warning("请登录")
             // 1.2秒后跳转到登录页面
             setTimeout(() => {
-                navigate('/userLayout/login');
+                navigate('/account/login');
             }, 1200);
         }else{
             const response=await ActivityJoin(params.get('key') as string,params.get('uuid') as string)
@@ -40,7 +41,7 @@ const GetMes=(key:string)=>{
         // @ts-expect-error
             document.title = content.items[0].activity_title;
         }
-        
+
         // 组件卸载时恢复原标题
         return () => {
             document.title = '校园生活'; // 或者你的默认标题
@@ -77,7 +78,7 @@ const GetMes=(key:string)=>{
                     <span>{/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
                         // @ts-expect-error
                     item.person_current}</span>
-                    / 
+                    /
                     <span>{/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
                         // @ts-expect-error
                     item.person_limit}</span></p>

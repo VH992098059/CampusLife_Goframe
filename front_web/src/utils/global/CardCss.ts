@@ -8,3 +8,12 @@ export const ImgStyle: React.CSSProperties = {
     width: 200,
 
 };
+export const CardPhoneStyle: React.CSSProperties = {
+    width: 320,
+};
+
+export const ImgPhoneStyle: React.CSSProperties = {
+    display: 'block',
+    width: 150,
+
+};

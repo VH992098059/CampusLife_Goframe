@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
-import {FloatButton, Layout, Modal, theme} from 'antd';
+import {FloatButton, Layout, theme} from 'antd';
 import HeaderModel from "./HeaderModel/HeaderModel.tsx";
 import { useOutlet, useLocation } from "react-router-dom";
 import "./HomeLayout.scss"
 import { MessageOutlined } from '@ant-design/icons';
-import { AiChat } from './chat/AiChat.tsx';
 const { Content, Footer } = Layout;
 
 
 /* 主页面组件 */
 const HomeLayout: React.FC = () => {
-    
+
     const {
         token: { colorBgContainer, borderRadiusLG },
     } = theme.useToken();
@@ -26,15 +25,13 @@ const HomeLayout: React.FC = () => {
         setVisible(false);
     };
     /* 指定隐藏url */
-    const showFooter = !location.pathname.includes('/activity') && 
-                      !location.pathname.includes('/search') && 
-                      !location.pathname.includes('/your-new-path');
+    const showFooter = location.pathname.includes('/home') 
 
     return (
         <Layout>
             <HeaderModel/>
-            
-            
+
+
             <Content>
                 <div
                     style={{
@@ -43,6 +40,7 @@ const HomeLayout: React.FC = () => {
                         borderRadius: borderRadiusLG,
                     }}
                 >
+
                      {currentOutlet}
                 </div>
                 <>
@@ -51,7 +49,7 @@ const HomeLayout: React.FC = () => {
                         style={{ right: 24, bottom: 24 }}
                         onClick={openChat}
                     />
-        
+
                 </>
             </Content>
             {showFooter && (

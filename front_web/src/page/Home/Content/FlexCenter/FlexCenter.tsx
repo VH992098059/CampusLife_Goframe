@@ -1,10 +1,14 @@
-import {Button, Card, Empty, Flex, Skeleton, Typography} from 'antd';
+import {Card, Empty, Flex, Skeleton, Typography} from 'antd';
 import {FireOutlined} from "@ant-design/icons";
 import { ActivityList } from "../../../../api/activity/activity";
 
 import {useEffect, useState} from "react";
 import {getUuid} from "../../../../router/token/token.tsx";
-import {CardStyle, ImgStyle} from "../../../../utils/global/CardCss.ts";
+import {
+    CardPhoneStyle,
+    CardStyle, ImgPhoneStyle,
+    ImgStyle
+} from "../../../../utils/global/CardCss.ts";
 
 /* 主页内容 */
 const Remen = () => {
@@ -13,8 +17,10 @@ const Remen = () => {
     const [size] = useState(8);
     const [isLoading, setIsLoading] = useState(true); // 添加加载状态
     const [hasMore, setHasMore] = useState(true); // 添加是否有更多数据的标志
+    const [widthCard,setWidthCard] = useState(window.innerWidth);
+
     const GetCardId = (key: string) => {
-        const url = getUuid() === null 
+        const url = getUuid() === null
           ? `/home/activity?key=${key}`
           : `/home/activity?key=${key}&uuid=${getUuid()}`;
         window.open(url, '_blank');
@@ -37,10 +43,18 @@ const Remen = () => {
             setIsLoading(false);
         }
     };
-
+    useEffect(() => {
+        const handleResize = () => {
+            setWidthCard(window.innerWidth);
+        };
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    })
     useEffect(() => {
         fetchData(page);
-        
+
     }, [page]);
     if(isLoading){
         return(
@@ -48,14 +62,14 @@ const Remen = () => {
         )
     }else if(items.length==0){
         return (
-            <div style={{ 
+            <div style={{
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
             }}>
-                <Empty 
-                    description="搜索未找到" 
-   
+                <Empty
+                    description="搜索未找到"
+
                 />
             </div>
         )
@@ -66,12 +80,12 @@ const Remen = () => {
                 {items.map((item) => (
                     /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
                     // @ts-expect-error
-                    <Card hoverable style={CardStyle} styles={{body: {padding: 0, overflow: 'hidden'}}} key={item.uuid} onClick={()=>{GetCardId(item.uuid)}}  >
+                    <Card hoverable style={widthCard>768?CardStyle:CardPhoneStyle} styles={{body: {padding: 0, overflow: 'hidden'}}} key={item.uuid} onClick={()=>{GetCardId(item.uuid)}}  >
                         <Flex justify="space-between">
                             <img
                                 alt="avatar"
                                 src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-                                style={ImgStyle}
+                                style={widthCard>768?ImgStyle:ImgPhoneStyle}
                             />
                             <Flex vertical align="flex-end" justify="space-between" style={{padding: 20}}>
                                 <Typography.Title level={5}>
@@ -79,7 +93,7 @@ const Remen = () => {
                                     { // @ts-expect-error
                                         item.activity_title}
                                 </Typography.Title>
-    
+
                                 <span
                                     id={"hot"}><FireOutlined/>&nbsp;{/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
                                     { // @ts-expect-error
@@ -95,11 +109,11 @@ const Remen = () => {
 const FlexCenter = () => (
    <div>
        <Flex gap={"middle"} vertical={true}>
-           <span style={{fontSize: "x-large", fontWeight: "bolder", padding: "0 25px"}}>热门活动</span>
-           <Flex gap="middle" justify={'space-around'} style={{flexWrap: 'wrap',margin:"30px 0"}}>
+           <span style={{fontSize: "x-large", fontWeight: "bolder"}}>热门活动</span>
+           <Flex gap="middle"  style={{flexWrap: 'wrap'}} className={"remen"} >
                {Remen()}
            </Flex>
-           
+
        </Flex>
 
    </div>

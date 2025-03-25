@@ -1,7 +1,9 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
+import svgr from "vite-plugin-svgr";
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
@@ -10,9 +12,13 @@ export default defineConfig({
       // 指定需要缓存的图标文件夹
       iconDirs: [path.resolve(process.cwd(), 'src/assets/svg')],
       // 指定symbolId格式
-      symbolId: 'icon-[dir]-[name]'
+      symbolId: 'icon-[dir]-[name]',
+     
+    }),
+    svgr({ 
+      include: "src/assets/icon/**/*.svg",
+      svgrOptions: { icon: true } 
     })
-
   ],
   server: {
     host: '0.0.0.0',//使用当前的IP地址，没有这个就是以localhost作为本地地址

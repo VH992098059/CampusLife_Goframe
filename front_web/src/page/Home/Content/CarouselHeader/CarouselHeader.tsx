@@ -13,7 +13,7 @@ const contentStyle: React.CSSProperties = {
 */
 
 const CarouselHeader: React.FC = () => (
-    <div id="carousel">
+    <div >
         <Carousel arrows autoplay infinite={true} effect="fade" id={"Carousel_Header"}>
             <div>
                 <h3 id={"Carousel_body"}>1</h3>
