@@ -1,1 +1,8 @@
-* linguist-language=GO
+* linguist-language=Go
+*.js linguist-language=TypeScript
+*.ts linguist-language=TypeScript
+*.tsx linguist-language=TypeScript
+*.jsx linguist-language=TypeScript
+*.sql linguist-language=SQL
+*.md linguist-documentation
+*.MD linguist-documentation
